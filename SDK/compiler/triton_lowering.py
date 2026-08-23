@@ -1,5 +1,13 @@
+# ============================================================================
+# Copyright (c) 2026 FairView Semiconductor Inc. All Rights Reserved.
+# Licensed under the FairView Semiconductor Evaluation & Silicon IP License.
+#
+# Module: TritonLoweringCompiler
+# Description: Compiler pass translating Triton kernels to Stallion ISA packets
+# ============================================================================
+
 class TritonLoweringCompiler:
-    """Translates mock Triton kernels to Stallion ISA instructions"""
+    """Translates mock Triton kernels to Stallion ISA instructions."""
     def __init__(self):
         pass
         
