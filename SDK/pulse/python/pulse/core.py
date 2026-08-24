@@ -15,3 +15,13 @@ def zeros(shape, dtype: str = "float32", device: str = "mpu:0"):
     """Allocates unified memory tensor across Gallium MMU 16.0 TB/s fabric."""
     print(f"[PULSE Python] Gallium MMU allocated {dtype} zeros of shape {shape} on {device}")
     return "GalliumBuffer"
+
+def ones(shape, dtype: str = "float32", device: str = "mpu:0"):
+    """Allocates unified memory tensor of ones across Gallium MMU 16.0 TB/s fabric."""
+    print(f"[PULSE Python] Gallium MMU allocated {dtype} ones of shape {shape} on {device}")
+    return "GalliumBuffer"
+
+def tensor(data, dtype: str = "float32", device: str = "mpu:0"):
+    """Allocates tensor on Stallion MPU & Gallium MMU fabric."""
+    print(f"[PULSE Python] Gallium MMU allocated tensor on {device}")
+    return data

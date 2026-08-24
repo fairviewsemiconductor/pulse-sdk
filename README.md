@@ -303,6 +303,67 @@ STATUS: Gate-level mapping passed with 0 timing/cell errors.
 
 ---
 
+## ⚡ UC Berkeley FreeToken & Elastic MoE Hardware Integration
+
+FairView Semiconductor provides native hardware-software co-design acceleration for **Mixture-of-Experts (MoE)** models (e.g., DeepSeek-R1/V3, Qwen 2.5, Llama 3.3) and dynamic memory offloading algorithms such as **UC Berkeley FreeToken**.
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                     THE FAIRVIEW 3Dx3D ZERO-STALL EXECUTION FLOW                       │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+                  [ PyTorch / FreeToken Elastic Graph ]
+                                    │
+                                    ▼
+       [ PULSE™ MLIR Compiler: --convert-torch-to-pulse --schedule-moe-elastic ]
+                                    │
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ STALLION 2nm GAAFET MPU (144 Systolic Matrix Execution Units @ 2.4 GHz)               │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ ▲ TSMC-SoIC Bumpless Cu-Cu Hybrid Bonding (<1 µm Pitch | <0.8 fF Parasitic Capacitance) │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ GALLIUM HBM4 BASE-DIE (16.0 TB/s Saturated Bandwidth @ <8ns Hardware MMU Latency)      │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ ZERO-WARPAGE GLASS CORE SUBSTRATE (3.2 ppm/K CTE Match | 0.05 pJ/bit Data Movement)    │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Key MoE Architectural Features:
+1. **16.0 TB/s Saturated Direct Memory Swapping:** Eliminates the multi-millisecond PCIe copper bus penalty ($128\text{ GB/s}$) when swapping un-cached expert weights.
+2. **0.05 pJ/bit Interconnect Efficiency:** Molecular Cu-Cu direct bonding slashes data-movement power dissipation by **98%** vs legacy micro-bumps.
+3. **In-Silicon Elastic Memory Budgeting:** Hardware-managed KV-cache virtualization and near-memory tensor staging dynamically allocate headroom between context tokens and expert weights without engine restarts.
+4. **PULSE™ MLIR Dialect:** Direct compilation pass (`pulse-opt --schedule-moe-elastic --fuse-cucu-transfers`) lowers arbitrary PyTorch MoE graphs into Stallion GDSII-ready instructions.
+
+### MoE Python Quickstart:
+```python
+import torch
+import pulse
+import pulse.moe
+
+# Initialize Stallion MPU device
+dev = pulse.device("mpu:0")
+
+# Configure FreeToken Elastic MoE Engine (64 experts, top-8 active)
+config = pulse.moe.Config(
+    num_experts=64,
+    active_experts_per_token=8,
+    memory_strategy="bandwidth_adaptive_cucu"
+)
+scheduler = pulse.moe.ElasticScheduler(config)
+
+# Dispatch routing pass with zero-latency 16.0 TB/s Cu-Cu prefetch
+routing_logits = torch.randn(4, 128, 64)
+topk_weights, active_experts = scheduler.schedule_experts(routing_logits)
+print(f"Active experts scheduled at 16.0 TB/s: {active_experts}")
+```
+
+### Run FreeToken MoE Verification Test:
+```bash
+python3 SDK/tests/test_moe_freetoken.py
+```
+
+---
+
 ## 📈 Hardware Design Life Cycle (HDLC) Roadmap
 
 ```

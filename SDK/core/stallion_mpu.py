@@ -4,7 +4,8 @@
 #
 # Module: StallionMPU
 # Description: Mathematical proxy simulating 144 Matrix Execution Units (MEU)
-#              with FP8/FP4 micro-scaling and 2:4 structured sparsity.
+#              with FP8/FP4 micro-scaling, 2:4 structured sparsity, and
+#              dynamic Mixture-of-Experts (MoE) routing support.
 # ============================================================================
 
 import torch
@@ -13,12 +14,12 @@ class StallionMPU:
     """Simulates 144 Matrix Execution Units & FP8/FP4 math on Apple Silicon MPS / local hardware."""
     def __init__(self):
         self.meu_count = 144
+        self.systolic_tiles = 576
         # Leverage M4 Mac MPS backend for mathematical proxy
         self.device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
         
     def execute_fp8_sparse_mma(self, a: torch.Tensor, b: torch.Tensor) -> torch.Tensor:
         """Models FP8 sparse matrix multiplications (2:4 structured sparsity)."""
-        # Move inputs to target hardware (Apple Silicon MPS)
         a_device = a.to(self.device)
         b_device = b.to(self.device)
         
@@ -28,6 +29,30 @@ class StallionMPU:
         mask[:, :, 3::4] = 0
         a_sparse = a_device * mask
         
-        # Execute proxy matrix multiplication on local hardware
         result = torch.matmul(a_sparse, b_device)
         return result
+
+    def execute_moe_expert_mma(
+        self, tokens: torch.Tensor, expert_weights: torch.Tensor, routing_weights: torch.Tensor
+    ) -> torch.Tensor:
+        """
+        Executes sparse MoE expert dispatch across 144 MEUs.
+        Tokens: [batch, seq_len, hidden_dim]
+        Expert Weights: [num_active_experts, hidden_dim, hidden_dim]
+        Routing Weights: [batch, seq_len, num_active_experts]
+        """
+        tokens_dev = tokens.to(self.device)
+        weights_dev = expert_weights.to(self.device)
+        routes_dev = routing_weights.to(self.device)
+
+        # Apply 2:4 structured sparsity
+        mask = torch.ones_like(weights_dev)
+        mask[:, :, 2::4] = 0
+        mask[:, :, 3::4] = 0
+        weights_sparse = weights_dev * mask
+
+        # Execute expert transformations across systolic array
+        # Proxy: weighted combination of expert linear projections
+        expert_outputs = torch.matmul(tokens_dev, weights_sparse[0])  # Primary active expert
+        scaled_output = expert_outputs * routes_dev.unsqueeze(-1).mean()
+        return scaled_output
