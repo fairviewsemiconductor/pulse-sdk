@@ -77,3 +77,8 @@ target/
 tb/
 sim_build*/
 *.xml
+
+# Gate-Level Netlists & Synthesis Artifacts
+synth/
+*.netlist.v
+*.ys
