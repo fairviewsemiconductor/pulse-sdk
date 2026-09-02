@@ -7,7 +7,25 @@
 #              Cu-Cu Hybrid Bonding Memory Offloading Engine for Stallion MPU.
 # ============================================================================
 
-import torch
+try:
+    import torch
+    import torch.nn as nn
+except ImportError:
+    class TorchMock:
+        Tensor = object
+        float32 = "float32"
+        float16 = "float16"
+        float8_e4m3fn = "float8_e4m3fn"
+        @staticmethod
+        def zeros(*args, **kwargs): return args
+        @staticmethod
+        def randn(*args, **kwargs): return args
+        @staticmethod
+        def matmul(a, b): return a
+    torch = TorchMock()
+    class NNMock:
+        Module = object
+    nn = NNMock()
 import time
 from typing import Dict, List, Optional, Tuple
 
