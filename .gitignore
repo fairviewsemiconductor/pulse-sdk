@@ -85,3 +85,11 @@ synth/
 
 # Local AI Agent Rules
 AGENTS.md
+
+# Verification Deliverables & Audit Documents (Strictly Local)
+*.docx
+*.doc
+*VERIFICATION*
+*STAGE*
+GALLIUM_VERIFICATION_AUDIT_REPORT.docx
+GALLIUM_VERIFICATION_SUMMARY.pptx
