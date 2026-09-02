@@ -82,3 +82,6 @@ sim_build*/
 synth/
 *.netlist.v
 *.ys
+
+# Local AI Agent Rules
+AGENTS.md
