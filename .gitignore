@@ -72,3 +72,8 @@ node_modules/
 dist/
 build/
 target/
+
+# Hardware Testbenches & Cocotb Sim Builds
+tb/
+sim_build*/
+*.xml
