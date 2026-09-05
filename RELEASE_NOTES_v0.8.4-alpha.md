@@ -1,3 +1,6 @@
+WITHDRAWN — product-scale claims are not implemented.
+See README INSTANCE. Do not cite 16 TB/s, 4.72 PFLOPS, CUDA-equivalent, or 144-MEU hardware.
+
 # PULSE™ SDK v0.8.4-alpha: UC Berkeley FreeToken MoE Integration & 16.0 TB/s Cu-Cu Silicon Acceleration
 
 We are thrilled to announce the release of **PULSE™ SDK v0.8.4-alpha**, introducing native hardware-software co-design support for **Mixture-of-Experts (MoE)** inference architectures and dynamic memory offloading frameworks, including **UC Berkeley's FreeToken**.
@@ -29,18 +32,18 @@ This release unifies algorithmic memory virtualization with Fairview Semiconduct
 ## 📦 What's Changed in This Release
 
 ### Python SDK (`SDK/pulse/python/pulse`)
-* Added [`pulse.moe`](file:///Users/srikanthjallapuram/Hardware/SDK/pulse/python/pulse/moe.py) with `Config` and `ElasticScheduler`.
-* Enhanced [`pulse.compiler`](file:///Users/srikanthjallapuram/Hardware/SDK/pulse/python/pulse/compiler.py) with `lower_triton_kernel()` supporting elastic MoE strategies and `compile_moe_graph()`.
-* Added tensor memory allocation helpers in [`pulse.core`](file:///Users/srikanthjallapuram/Hardware/SDK/pulse/python/pulse/core.py).
+* Added [`pulse.moe`](SDK/pulse/python/pulse/moe.py) with `Config` and `ElasticScheduler`.
+* Enhanced [`pulse.compiler`](SDK/pulse/python/pulse/compiler.py) with `lower_triton_kernel()` supporting elastic MoE strategies and `compile_moe_graph()`.
+* Added tensor memory allocation helpers in [`pulse.core`](SDK/pulse/python/pulse/core.py).
 
 ### C++20 / C ABI Drivers (`SDK/pulse/include`)
-* Added `namespace pulse::moe` with `ElasticScheduler` and `Config` in [`pulse.hpp`](file:///Users/srikanthjallapuram/Hardware/SDK/pulse/include/pulse.hpp).
+* Added `namespace pulse::moe` with `ElasticScheduler` and `Config` in [`pulse.hpp`](SDK/pulse/include/pulse.hpp).
 * Updated RAII buffer management with move semantics for `GalliumBuffer<T>`.
 
 ### Hardware Emulation & Verification (`SDK/core` & `SDK/tests`)
-* Updated [`stallion_mpu.py`](file:///Users/srikanthjallapuram/Hardware/SDK/core/stallion_mpu.py) with `execute_moe_expert_mma()` for Apple Silicon M4 / MPS proxy verification.
-* Updated [`gallium_mmu.py`](file:///Users/srikanthjallapuram/Hardware/SDK/core/gallium_mmu.py) with `swap_expert_cucu()` and in-silicon PagedAttention allocation.
-* Added comprehensive integration test: [`SDK/tests/test_moe_freetoken.py`](file:///Users/srikanthjallapuram/Hardware/SDK/tests/test_moe_freetoken.py).
+* Updated [`stallion_mpu.py`](SDK/core/stallion_mpu.py) with `execute_moe_expert_mma()` for Apple Silicon M4 / MPS proxy verification.
+* Updated [`gallium_mmu.py`](SDK/core/gallium_mmu.py) with `swap_expert_cucu()` and in-silicon PagedAttention allocation.
+* Added comprehensive integration test: [`SDK/tests/test_moe_freetoken.py`](SDK/tests/test_moe_freetoken.py).
 
 ---
 

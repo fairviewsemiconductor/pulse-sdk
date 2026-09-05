@@ -1,5 +1,7 @@
 # FairView Semiconductor — Security & Vulnerability Disclosure Policy
 
+Do not describe this repo as production silicon drivers.
+
 FairView Semiconductor takes the security and integrity of its silicon architectures, RTL engines, memory controllers, and software drivers seriously.
 
 ## Reporting a Vulnerability

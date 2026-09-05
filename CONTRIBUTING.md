@@ -1,5 +1,7 @@
 # Contributing to FairView Semiconductor
 
+Do not describe this repo as production silicon drivers.
+
 Thank you for your interest in contributing to the **FairView Semiconductor Master Hardware & PULSE SDK Repository**.
 
 ## Hardware & RTL Engineering Guidelines

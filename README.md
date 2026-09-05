@@ -1,20 +1,45 @@
-<div align="center">
+# PULSE SDK — pre-silicon HOST experiment
 
-# FairView Semiconductor Inc.
-### PULSE™ Polyglot SDK, Compiler & Hardware Runtime Driver Suite
+PULSE is a pre-silicon **HOST** experiment.
+It is **not CUDA**, not a device driver, and not connected to a foundry GDS.
 
-[![License: Apache 2.0 / Evaluation](https://img.shields.io/badge/License-Apache_2.0_&_Evaluation-00d2c4.svg)](LICENSE)
-[![Framework: PyTorch 2.x](https://img.shields.io/badge/PyTorch-2.x_Native_Backend-EE4C2C.svg?logo=pytorch)](https://pytorch.org)
-[![Compiler: Triton MLIR](https://img.shields.io/badge/Compiler-Triton_JIT_Lowering-blueviolet.svg)](SDK/compiler/triton_lowering.py)
-[![Polyglot Runtime](https://img.shields.io/badge/Polyglot-C_%7C_C%2B%2B_%7C_Python_%7C_Rust_%7C_Go-8b5cf6.svg)](SDK/pulse/)
-[![Kubernetes Device Plugin](https://img.shields.io/badge/K8s_Plugin-fairview.com%2Fmpu-326ce5.svg?logo=kubernetes)](SDK/pulse/go/pulse/k8s_plugin.go)
-[![Build Status](https://img.shields.io/badge/Polyglot_Verification-Passing_(5%2F5)-10b981.svg)](SDK/pulse/run_all_tests.sh)
+**INSTANCE:** GRID=4 (16 PEs), 1 engine, PHY=NONE, SRAM 32-bit.
 
-**Silicon Valley, California · [fairviewsemi.com](https://fairviewsemi.com) · [engineering@fairviewsemi.com](mailto:engineering@fairviewsemi.com)**
+This repository is `github.com/fairviewsemiconductor/pulse-sdk`.
+It does **not** contain RTL, Sky130 GDS, or `fv_chip_top`.
+Nine RTL testbenches live in a different repo; this SDK does not drive silicon.
 
-</div>
+Stallion/Gallium product numbers (144 MEU, 576 engines, 16 TB/s HBM4, 4.72 PFLOPS, 2 nm, 350W, sub-8 ns, CUDA/ROCm-class) are **FORMULA**, not this drop.
+
+## What runs here
+
+- PyTorch CPU/MPS matmul helpers and a small integer GEMM golden
+- Language wrappers (C, C++, Python, Rust, Go)
+- Host ISA word packer for opcodes A1 (DMA) and B1 (MMA) — does not execute on a device
+
+## What does not run
+
+- HBM4, JEDEC PHY, 16 TB/s, 512 GB
+- Kubernetes DevicePlugin as production
+- Triton → Stallion ISA compiler / torch.compile Inductor backend
+- 144 MEU silicon
+- FreeToken as UC Berkeley hardware
+
+## Hardware evidence
+
+Fairview pre-silicon pack (**RTL repo**), not this README.
+
+## Gate (this repo)
+
+`SDK/pulse/run_all_tests.sh` compiles and runs C, C++, Python, Rust, and Go **wrapper smoke tests**.
+It does not run RTL TBs, OpenLane, STA, or a device.
 
 ---
+
+# WITHDRAWN DRAFT
+
+> **WITHDRAWN** — product-scale claims below are not implemented.
+> See README INSTANCE above. Do not cite 16 TB/s, 4.72 PFLOPS, CUDA-equivalent, or 144-MEU hardware.
 
 ## ⚡ Executive Overview
 
