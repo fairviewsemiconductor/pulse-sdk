@@ -1,15 +1,14 @@
-# PULSE SDK — pre-silicon HOST experiment
+# PULSE SDK — Pre-silicon host runtime
 
-PULSE is a pre-silicon **HOST** experiment.
-It is **not CUDA**, not a device driver, and not connected to a foundry GDS.
+PULSE is the **host-side programming interface** for Fairview pre-silicon bring-up.
+It is not CUDA, not a device driver, and not connected to a foundry GDS.
 
 **INSTANCE:** GRID=4 (16 PEs), 1 engine, PHY=NONE, SRAM 32-bit.
 
-This repository is `github.com/fairviewsemiconductor/pulse-sdk`.
-It does **not** contain RTL, Sky130 GDS, or `fv_chip_top`.
-Nine RTL testbenches live in a different repo; this SDK does not drive silicon.
+This repository does not contain RTL, Sky130 GDS, or `fv_chip_top`.
+Nine RTL testbenches live in a separate private tree. This SDK does not drive silicon.
 
-Stallion/Gallium product numbers (144 MEU, 576 engines, 16 TB/s HBM4, 4.72 PFLOPS, 2 nm, 350W, sub-8 ns, CUDA/ROCm-class) are **FORMULA**, not this drop.
+Stallion/Gallium product-scale numbers (144 MEU, 576 engines, 16 TB/s HBM4, 4.72 PFLOPS, 2 nm, 350W, sub-8 ns, CUDA/ROCm-class) are FORMULA, not this drop.
 
 ## What runs here
 
