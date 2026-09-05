@@ -1,6 +1,6 @@
 # PULSE SDK — Pre-silicon host runtime
 
-PULSE is the **host-side programming interface** for Fairview pre-silicon bring-up.
+PULSE is the host-side programming interface for Fairview pre-silicon bring-up.
 It is not CUDA, not a device driver, and not connected to a foundry GDS.
 
 **INSTANCE:** GRID=4 (16 PEs), 1 engine, PHY=NONE, SRAM 32-bit.
