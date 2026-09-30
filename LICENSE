@@ -1,0 +1,45 @@
+==============================================================================
+FAIRVIEW SEMICONDUCTOR INC. — EVALUATION & SILICON IP LICENSE
+==============================================================================
+
+Copyright (c) 2026 FairView Semiconductor Inc.
+All Rights Reserved.
+
+Permission is hereby granted, free of charge, to any authorized entity or 
+evaluator obtaining a copy of this software, SystemVerilog RTL definitions, 
+driver interfaces, and associated documentation files (the "Software & Silicon IP"), 
+to inspect, evaluate, simulate, and compile the Software & Silicon IP for 
+pre-silicon validation, architectural diligence, and benchmarking purposes, 
+subject to the following conditions:
+
+1. PROPRIETARY SILICON IP & PATENT NOTICE:
+   The architectural designs, SystemVerilog RTL modules, micro-bump bump maps, 
+   memory controller arbiters, and systolic matrix execution unit definitions 
+   contained herein represent proprietary trade secrets and patent-pending 
+   intellectual property of FairView Semiconductor Inc. Physical fabrication, 
+   tapeout, lithographic mask preparation, or commercial silicon manufacturing 
+   without an explicit, executed Foundry License Agreement from FairView 
+   Semiconductor Inc. is strictly prohibited.
+
+2. SOFTWARE & DRIVER ECOSYSTEM (PULSE SDK):
+   The PULSE SDK client libraries, C ABI bindings, C++ wrappers, Rust crates, 
+   Go Kubernetes device plugins, and Python compiler lowerings are provided 
+   under an open evaluation grant for integration with third-party software 
+   stacks, AI frameworks (PyTorch, Triton, JAX), and cloud orchestration runtimes.
+
+3. COPYRIGHT & ATTRIBUTION:
+   The above copyright notice, this evaluation grant, and the disclaimer below 
+   shall be included in all copies or substantial portions of the Software & Silicon IP.
+
+4. DISCLAIMER OF WARRANTY:
+   THE SOFTWARE & SILICON IP IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+   FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER 
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, 
+   OUT OF, OR IN CONNECTION WITH THE SOFTWARE & SILICON IP OR THE USE OR OTHER 
+   DEALINGS IN THE SOFTWARE & SILICON IP.
+
+==============================================================================
+FairView Semiconductor Inc. · Silicon Valley, California · info@fairviewsemi.com
+==============================================================================
